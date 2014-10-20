@@ -27,12 +27,24 @@ DISABLE_UPDATE_PROMPT="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew)
+plugins=(brew screen sublime terminalapp rake)
 
 source $ZSH/oh-my-zsh.sh
 
+export LC_ALL="en_US.UTF-8"
+
 # Customize to your needs...
-export PATH=/Users/farthen/Code/arm/bin:/Users/farthen/Code/arm/bin:/usr/local/Cellar/ruby/1.9.3-p362/bin:/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/CrossPack-AVR/bin:/usr/local/texlive/2012/bin/x86_64-darwin
+export PATH=/opt/toolchains/gcc-arm-none-eabi-4_9-2014q4/bin:/usr/local/opt/ruby/bin:/opt/local/bin:/opt/local/sbin:$PATH
+eval `/usr/libexec/path_helper -s`
+
+# ZSH completions installed through homebrew
+fpath=(/usr/local/share/zsh/site-functions $fpath)
+autoload -U compinit && compinit
+zmodload -i zsh/complist
+
+#TOOLCHAINS=$(find /opt/toolchains -maxdepth 2 -mindepth 2 -type d -name 'bin' -exec printf {}: \;)
+#export PATH=${TOOLCHAINS}${PATH}
+export PATH=/usr/local/texlive/2015/bin/x86_64-darwin:$PATH
 
 # Set Apple Terminal.app resume directory
 if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
@@ -46,3 +58,15 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
   chpwd
 }
 
+EDITOR="subl"
+alias rake='nocorrect rake'
+
+export HOMEBREW_INSTALL_BADGE='🍵'
+export HOMEBREW_GITHUB_API_TOKEN='3803c3cbad54dbcf47bd5be5536c35e80e60f1b2'
+
+export RUST_SRC_PATH=/Users/farthen/Code/rust/rust-2015-05-15/src
+alias cargo='nocorrect cargo'
+
+setopt HIST_IGNORE_SPACE
+
+source /Users/farthen/.iterm2_shell_integration.zsh 2> /dev/null || true
