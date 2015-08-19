@@ -35,7 +35,10 @@ export LC_ALL="en_US.UTF-8"
 
 # Customize to your needs...
 export PATH=/opt/toolchains/gcc-arm-none-eabi-4_9-2014q4/bin:/usr/local/opt/ruby/bin:/opt/local/bin:/opt/local/sbin:$PATH
-eval `/usr/libexec/path_helper -s`
+
+if [ "$(uname)" == "Darwin" ]; then
+	eval `/usr/libexec/path_helper -s`
+fi
 
 # ZSH completions installed through homebrew
 fpath=(/usr/local/share/zsh/site-functions $fpath)
